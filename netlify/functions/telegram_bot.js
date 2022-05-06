@@ -6,7 +6,7 @@ const sendMessage = require("../../utils/sendMessage");
 exports.handler = async (event) => {
     const { message } = JSON.parse(event.body);
 
-    if (message.text.trim() == "/start") {
+    if (message.text == "/start") {
         await sendMessage({
             chat_id: message.chat.id,
             text: "Welcome to the bot. Share me tiktok url to start downloading video!"}
