@@ -21,22 +21,32 @@ module.exports = async ({ chat_id, video_url }) => {
             return response.data;
         })
         .catch(function (error) {
-            console.error(error);
-            return "";
+            console.error("error");
+            return false;
         });
 
-    if (result.data.play == "") {
-        await sendMessage({chat_id, text: "The url is broken. Please try another link!"});
-        return false;
-    }
-    await axios.post(
-        `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendVideo`,
-        {
+    if (result.code == -1) {
+        await sendMessage(
             chat_id,
-            video: result.data.play,
-            supports_streaming: true,
-        }
-    );
+            "The url is broken. Please try another link!"
+        );
+        return false;
+    } else {
+        axios
+            .post(
+                `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendVideo`,
+                {
+                    chat_id,
+                    video: result.data.play,
+                }
+            )
+            .then((res) => {
+                sendMessage(chat_id, "Here is your video!!!");
+            })
+            .catch((error) => {
+                sendMessage(chat_id, "Sorry, there is an internal error!");
+            });
 
-    return true;
+        return true;
+    }
 };
