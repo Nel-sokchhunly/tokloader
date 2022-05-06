@@ -26,10 +26,10 @@ module.exports = async ({ chat_id, video_url }) => {
         });
 
     if (result.data.play == "") {
-        sendMessage(chat_id, "The url is broken. Please try another link!");
+        await sendMessage({chat_id, text: "The url is broken. Please try another link!"});
         return false;
     }
-    axios.post(
+    await axios.post(
         `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendVideo`,
         {
             chat_id,

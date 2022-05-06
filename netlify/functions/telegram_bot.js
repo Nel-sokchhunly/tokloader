@@ -6,10 +6,10 @@ const sendMessage = require("../../utils/sendMessage");
 exports.handler = async (event) => {
     const { message } = JSON.parse(event.body);
 
-    if (message.text == "/start") {
-        await sendMessage(
-            message.chat.id,
-            "Welcome to the bot. Share me tiktok url to start downloading video!"
+    if (message.text.trim() == "/start") {
+        await sendMessage({
+            chat_id: message.chat.id,
+            text: "Welcome to the bot. Share me tiktok url to start downloading video!"}
         );
     } else {
         // regex
@@ -19,9 +19,9 @@ exports.handler = async (event) => {
         const isTikTokVideo = re.test(message.text);
 
         if (!isTikTokVideo) {
-            await sendMessage(
-                message.chat.id,
-                "the text you sent is not tiktok url"
+            await sendMessage({
+                chat_id: message.chat.id,
+                text: "the text you sent is not tiktok url"}
             );
         } else {
             await sendMessage(message.chat.id, "Getting you the video...");
