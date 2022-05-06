@@ -1,7 +1,10 @@
+const sendMessage = require("./sendMessage");
+
 const axios = require("axios").default;
 
 module.exports = async ({ chat_id, video_url }) => {
     // getting video url
+
     const options = {
         method: "GET",
         url: "https://tiktok-video-no-watermark2.p.rapidapi.com/",
@@ -12,22 +15,26 @@ module.exports = async ({ chat_id, video_url }) => {
         },
     };
 
-    const url = await axios
+    const result = await axios
         .request(options)
         .then(function (response) {
-            return response.data.data.play;
+            return response.data;
         })
         .catch(function (error) {
             console.error(error);
             return "";
         });
 
-    if (url == "") return false;
-    await axios.post(
+    if (result.data.play == "") {
+        sendMessage(chat_id, "The url is broken. Please try another link!");
+        return false;
+    }
+    axios.post(
         `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendVideo`,
         {
             chat_id,
-            video: video_url,
+            video: result.data.play,
+            supports_streaming: true,
         }
     );
 
