@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/Nel-sokchhunly/tokloader/issues"
   },
-  "homepage": "https://github.com/Nel-sokchhunly/tokloader#readme"
+  "homepage": "https://github.com/Nel-sokchhunly/tokloader#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.0"
+  }
 }
