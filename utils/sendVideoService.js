@@ -32,7 +32,7 @@ module.exports = async ({ chat_id, video_url }) => {
         );
         return false;
     } else {
-        axios
+        await axios
             .post(
                 `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendVideo`,
                 {
