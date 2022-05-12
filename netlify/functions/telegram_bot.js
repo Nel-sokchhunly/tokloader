@@ -10,7 +10,7 @@ exports.handler = async (event) => {
         var TEXT = message.text;
 
         const re = new RegExp(
-            "^(https:\/\/vm.tiktok.com\/)|(https:\/\/vt.tiktok.com\/).*$"
+            "^(https:\/\/vm.tiktok.com\/)|(https:\/\/vt.tiktok.com\/).*"
         );
         const isTikTokVideo = re.test(TEXT);
 
