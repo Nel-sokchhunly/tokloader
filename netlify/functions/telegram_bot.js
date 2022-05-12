@@ -31,7 +31,7 @@ exports.handler = async (event) => {
         } else {
             await sendMessage(message.chat.id, "Getting you the video...");
             console.log('downloading the video')
-            await sendVideoService({
+            sendVideoService({
                 chat_id: message.chat.id,
                 video_url: TEXT,
             });
