@@ -37,7 +37,7 @@ module.exports = async ({ chat_id, video_url }) => {
     await sendMessage({chat_id, text: "Here is the video link when you waiting for actual video"});
 
 
-    await axios.post(
+    axios.post(
         `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendVideo`,
         {
             chat_id,
