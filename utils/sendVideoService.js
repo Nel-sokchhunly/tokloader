@@ -23,7 +23,9 @@ module.exports = async ({ chat_id, video_url }) => {
         })
         .catch(function (error) {
             console.error(error);
-            return "";
+            return {
+                code: -1,
+            };
         });
 
     if (result.code == -1) {
