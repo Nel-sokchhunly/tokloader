@@ -23,6 +23,7 @@ module.exports = async ({ chat_id, video_url }) => {
         })
         .catch(function (error) {
             console.error(error);
+            console.log('getting video url error')
             return undefined;
         });
 
