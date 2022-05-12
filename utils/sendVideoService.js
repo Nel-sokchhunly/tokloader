@@ -23,12 +23,10 @@ module.exports = async ({ chat_id, video_url }) => {
         })
         .catch(function (error) {
             console.error(error);
-            return {
-                code: -1,
-            };
+            return undefined;
         });
 
-    if (result.code == -1) {
+    if (result == undefined || result.code == -1) {
         console.log('the url is broken');
         await sendMessage({chat_id, text: "The url is broken. Please try another link!"});
         return false;
