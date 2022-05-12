@@ -10,7 +10,7 @@ exports.handler = async (event) => {
         var TEXT = message.text;
 
         const re = new RegExp(
-            "^(https://vm.tiktok.com/)|(https://vt.tiktok.com/).*$"
+            "^(https:\/\/vm.tiktok.com\/)|(https:\/\/vt.tiktok.com\/).*$"
         );
         const isTikTokVideo = re.test(TEXT);
 
@@ -19,15 +19,18 @@ exports.handler = async (event) => {
                 message.chat.id,
                 "Welcome to the bot. Share me tiktok url to start downloading video!"
             );
+            console.log("Response with Start message.")
             return { statusCode: 200 };
         } else if (!isTikTokVideo) {
             await sendMessage(
                 message.chat.id,
                 "the text you sent is not tiktok url"
             );
+            console.log('response with url is not tiktok link')
             return { statusCode: 200 };
         } else {
             await sendMessage(message.chat.id, "Getting you the video...");
+            console.log('downloading the video')
             sendVideoService({
                 chat_id: message.chat.id,
                 video_url: TEXT,
